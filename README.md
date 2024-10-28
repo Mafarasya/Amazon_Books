@@ -37,3 +37,79 @@ The pipeline follows the typical ETL process:
 1. Clone the repository:
    ```bash
    git clone <repository-url>
+
+---
+
+## Pipeline structure
+This DAG includes three main tasks:
+
+- **Fetch Book Data**: Scrapes data for data engineering books from Amazon.
+- **Create Table**: Creates a books table in PostgreSQL if it doesn’t already exist.
+- **Insert Book Data**: Loads the transformed data into the PostgreSQL table.
+  
+---
+
+## DAG Configuration
+
+The DAG, `fetch_and_store_amazon_books`, is scheduled to run daily with a retry policy of 5 minutes between retries. The DAG configuration is as follows:
+
+```python
+default_args = {
+    'owner': 'airflow',
+    'depends_on_past': False,
+    'start_date': datetime(2024, 10, 12),
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5)
+}
+
+dag = DAG(
+    'fetch_and_store_amazon_books',
+    default_args=default_args,
+    description='Simple DAG to fetch book data from Amazon and store it in PostgreSQL',
+    schedule_interval=timedelta(days=1)
+)
+```
+---
+
+## Tasks
+
+### fetch_book_data
+
+- Scrapes Amazon’s search results for data engineering books.
+- Uses BeautifulSoup to parse and extract title, author, price, and rating.
+- Pushes the cleaned data to XCom for the next task.
+
+### create_table
+
+- Creates a PostgreSQL table named `books` to store book data.
+- Ensures the table schema includes columns for title, author, price, and rating.
+
+### insert_book_data
+
+- Retrieves data from XCom and inserts it into the PostgreSQL `books` table.
+- Uses PostgreSQL hooks to establish the database connection and execute insertion queries.
+
+---
+
+## Running the DAG
+
+1. Start Airflow:
+    ```bash
+    airflow scheduler
+    airflow webserver
+    ```
+2. Trigger the DAG in the Airflow UI to run the ETL process.
+
+---
+
+## Screenshots
+
+Please include the following screenshots for better context:
+
+- **Airflow DAG UI:** Show the structure and tasks of the DAG in the Airflow UI.
+- **PostgreSQL Table Query Results:** Show the output of a query that verifies data in the books table.
+
+Add screenshots in a `screenshots` folder and reference them here:
+
+- Airflow DAG UI: `airflow_dag_ui.jpeg`
+- PostgreSQL Data Query: `postgres_query.jpeg`
