@@ -1,0 +1,47 @@
+# Ignore environment files
+.env
+
+# Ignore Python cache and virtual environment
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.whl
+*.egg-info/
+dist/
+build/
+venv/
+
+# Ignore Node.js dependencies and build files (if using Node.js)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Ignore Docker-related files
+docker-compose.override.yml
+docker-compose.*.yml
+docker-compose.yaml
+.dockerignore
+
+# Ignore log files
+*.log
+logs/
+*.out
+*.err
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE and editor config files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore additional sensitive files
+id_rsa
+id_rsa.pub
+*.pem
+*.key
