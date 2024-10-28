@@ -11,8 +11,8 @@ This project is an Airflow-based data pipeline that scrapes book information fro
 4. [Pipeline Structure](#pipeline-structure)
 5. [DAG Configuration](#dag-configuration)
 6. [Tasks](#tasks)
-7. [Running the DAG](#running-the-dag)
-8. [Screenshots](#screenshots)
+7. [Screenshots](#screenshots)
+8. [References](#references)
 
 ---
 
@@ -74,18 +74,15 @@ dag = DAG(
 ## Tasks
 
 ### fetch_book_data
-
 - Scrapes Amazon’s search results for data engineering books.
 - Uses BeautifulSoup to parse and extract title, author, price, and rating.
 - Pushes the cleaned data to XCom for the next task.
 
 ### create_table
-
 - Creates a PostgreSQL table named `books` to store book data.
 - Ensures the table schema includes columns for title, author, price, and rating.
 
 ### insert_book_data
-
 - Retrieves data from XCom and inserts it into the PostgreSQL `books` table.
 - Uses PostgreSQL hooks to establish the database connection and execute insertion queries.
 
@@ -97,5 +94,10 @@ dag = DAG(
 ![airflow result](airflow_dag_ui.jpeg)
 - **PostgreSQL Table Query Results:** Show the output of a query that verifies data in the books table.
 ![postgres query results](postgres_query.jpeg)
+
+---
+
+## References
+https://www.youtube.com/watch?v=3xyoM28B40Y&t=302s
 
 ---
