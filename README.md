@@ -91,25 +91,11 @@ dag = DAG(
 
 ---
 
-## Running the DAG
-
-1. Start Airflow:
-    ```bash
-    airflow scheduler
-    airflow webserver
-    ```
-2. Trigger the DAG in the Airflow UI to run the ETL process.
-
----
-
 ## Screenshots
 
-Please include the following screenshots for better context:
-
 - **Airflow DAG UI:** Show the structure and tasks of the DAG in the Airflow UI.
+![airflow result](airflow_dag_ui.jpeg)
 - **PostgreSQL Table Query Results:** Show the output of a query that verifies data in the books table.
+![postgres query results](postgres_query.jpeg)
 
-Add screenshots in a `screenshots` folder and reference them here:
-
-- Airflow DAG UI: `airflow_dag_ui.jpeg`
-- PostgreSQL Data Query: `postgres_query.jpeg`
+---
